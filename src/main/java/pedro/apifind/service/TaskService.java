@@ -8,7 +8,9 @@ import pedro.apifind.entity.Task;
 import pedro.apifind.repository.TaskRepository;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -57,7 +59,7 @@ public class TaskService {
         task.setDescricao(taskVO.getDescription());
         task.setStatus(taskVO.getStatus());
         task.setDataCriacao(taskVO.getDateCreation());
-        task.setDataAtualizacao(taskVO.getDateUpdate());
+        task.setDataAtualizacao(Date.from(Instant.now()));
 
 		taskRepository.save(task);
     }
