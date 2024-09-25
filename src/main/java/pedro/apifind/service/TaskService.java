@@ -8,6 +8,7 @@ import pedro.apifind.entity.Task;
 import pedro.apifind.repository.TaskRepository;
 
 import java.io.IOException;
+import java.rmi.server.ExportException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,17 +55,23 @@ public class TaskService {
         return new TaskVO(task);
     }
 
-    public void updateTask(TaskVO taskVO) throws IOException {
+    public void updateTask(TaskVO taskVO) throws Exception {
+        try{
+            if(taskVO.getTitle() != null && taskVO.getDescription() != null && taskVO.getStatus() != null  && taskVO.getDateCreation() != null ){
+                Task task = taskRepository.getById(taskVO.getId());
 
-		Task task = taskRepository.getById(taskVO.getId());
+                task.setTitulo(taskVO.getTitle());
+                task.setDescricao(taskVO.getDescription());
+                task.setStatus(taskVO.getStatus());
+                task.setDataCriacao(taskVO.getDateCreation());
+                task.setDataAtualizacao(Date.from(Instant.now()));
 
-        task.setTitulo(taskVO.getTitle());
-        task.setDescricao(taskVO.getDescription());
-        task.setStatus(taskVO.getStatus());
-        task.setDataCriacao(taskVO.getDateCreation());
-        task.setDataAtualizacao(Date.from(Instant.now()));
+                taskRepository.save(task);
+            }
+        } catch (Exception e){
+            throw new Exception("Preencha todas as informações", e);
+        }
 
-		taskRepository.save(task);
     }
 
     public HttpStatus deleteTask(Long id){

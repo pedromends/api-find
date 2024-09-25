@@ -35,7 +35,7 @@ public class TaskController {
     }
 
     @PutMapping("/tasks/{id}")
-    public ResponseEntity<Object> updateTask(@PathVariable("id") Long id, @RequestBody TaskVO taskVO) throws IOException {
+    public ResponseEntity<Object> updateTask(@PathVariable("id") Long id, @RequestBody TaskVO taskVO) throws Exception {
         taskService.updateTask(taskVO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
