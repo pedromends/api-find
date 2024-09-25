@@ -19,7 +19,7 @@ public class TaskController {
     TaskService taskService;
 
     @PostMapping("/tasks")
-    public ResponseEntity<Object> createTask(@RequestBody TaskVO taskVO) throws IOException {
+    public ResponseEntity<Object> createTask(@RequestBody TaskVO taskVO) throws Exception {
 		taskService.createTask(taskVO);
         return ResponseEntity.ok(HttpStatus.OK);
     }

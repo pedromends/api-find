@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>pedro</groupId>
-    <artifactId>api-pokedex</artifactId>
+    <artifactId>api-find</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>api-pokedex</name>
     <description>api-pokedex</description>

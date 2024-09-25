@@ -19,19 +19,22 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public void createTask(TaskVO taskVO) throws IOException {
+    public void createTask(TaskVO taskVO) throws Exception {
         try{
-            Task task = new Task();
+            if(taskVO.getTitle() != null && taskVO.getDescription() != null && taskVO.getStatus() != null  && taskVO.getDateCreation() != null ){
+                Task task = new Task();
 
-            task.setTitulo(taskVO.getTitle());
-            task.setDescricao(taskVO.getDescription());
-            task.setStatus(taskVO.getStatus());
-            task.setDataCriacao(taskVO.getDateCreation());
-            task.setDataAtualizacao(taskVO.getDateUpdate());
-            System.out.println(task);
-            taskRepository.save(task);
+                task.setTitulo(taskVO.getTitle());
+                task.setDescricao(taskVO.getDescription());
+                task.setStatus(taskVO.getStatus());
+                task.setDataCriacao(taskVO.getDateCreation());
+                task.setDataAtualizacao(taskVO.getDateUpdate());
+
+                taskRepository.save(task);
+            }
+
         }catch(Exception e){
-            System.out.println(e);
+            throw new Exception("Preencha todas as informações", e);
         }
     }
 
